@@ -11,6 +11,7 @@ TFR_OF_STAGE_III_COUNTRIES = pd.read_csv("../../../data/UN/fertility/TFR_per_cou
 POSTERIOR_DISTRIBUTION_OF_PARAMETERS_PREFIX = "../../../output/estimation/fertility_III/PMMH_fertility_III_"
 
 N_samples = 100
+BURN_IN_ratio = 0.1
 N_years_ahead = 25
 
 
@@ -23,6 +24,7 @@ def run(country):
     POSTERIOR_DISTRIBUTION_OF_PARAMETERS = POSTERIOR_DISTRIBUTION_OF_PARAMETERS_PREFIX + country + ".pkl"
     with open(f'{POSTERIOR_DISTRIBUTION_OF_PARAMETERS}', 'rb') as handle:
         theta_samples = pickle.load(handle).theta
+    theta_samples = theta_samples[int(BURN_IN_ratio * len(theta_samples)):]
     thetas = theta_samples[np.random.choice(len(theta_samples), size=N_samples, replace=False)]
     initial_fertility = DATA[-1]
     simulations = [fertility_III.fertility_III(initial_fertility, *tuple(thetas[i])) for i in range(N_samples)]

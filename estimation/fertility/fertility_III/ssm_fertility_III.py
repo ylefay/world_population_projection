@@ -16,4 +16,4 @@ class fertility_III(ssm.StateSpaceModel):
         return dists.Normal(loc=self.mu + self.rho * (xp - self.mu), scale=self.sigma_b)
 
     def PY(self, t, xp, x):
-        return dists.Normal(loc=x, scale=0.05)
+        return dists.Normal(loc=x, scale=0.02)
