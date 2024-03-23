@@ -1,4 +1,0 @@
-world:
-  mu: 2.1 # long-term fertility rate
-  rho: 0.89 # autocorrelation for the AR
-  sigma_b: 0.10 # standard deviation of the AR

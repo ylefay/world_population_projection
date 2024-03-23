@@ -9,13 +9,14 @@ def five_year_decrement(fertility_rate, delta_c):
     return _
 
 
-class fertility_rate:
+class fertility_II:
     """
     Fertility dynamic for phase II countries
     """
 
-    def __init__(self, initial_fertility, delta_c, sigma):
-        self.path = np.array([initial_fertility])
+    def __init__(self, N_samples, initial_fertility, delta_c, sigma):
+        self.N_samples = N_samples
+        self.path = np.array([initial_fertility]) * N_samples
         self.delta_c = delta_c
         self.sigma = sigma
 
@@ -23,8 +24,10 @@ class fertility_rate:
         """
         Run the model for one year
         """
-        noise = self.sigma(len(self.path, self.path[-1])) * np.random.normal(0., scale=1.0)
-        self.path = np.append(self.path, self.path[-1] - five_year_decrement(self.path[-1], self.delta_c) + noise)
+        sigma = np.vectorize(lambda x: self.sigma(self.path.shape[0], x))(self.path[-1, :])
+        noise = sigma * np.random.multivariate_normal(0., scale=np.eye(self.N_samples))
+        five_year_decrements = np.vectorize(lambda x: five_year_decrement(x, self.delta_c))(self.path[-1, :])
+        self.path = np.append(self.path, self.path[-1, :] - five_year_decrements + noise, axis=0)
 
     def simulate(self, n_years):
         """

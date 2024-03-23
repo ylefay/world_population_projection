@@ -1,0 +1,6 @@
+world:
+  mu: 2.1 # long-term fertility rate
+  rho: 0.89 # autocorrelation for the AR
+  sigma_b: 0.10 # standard deviation of the AR
+  #### Fitting an Exponential distribution on the initial fertility, TFR = 2 - Exp(Lambda) with
+  scale: 0.04029496402877704 # scale parameter of the exponential (pdf. prop to exp(-x/scale))
