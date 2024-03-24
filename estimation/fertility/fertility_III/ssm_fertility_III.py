@@ -2,7 +2,7 @@ from particles import state_space_models as ssm
 from particles import distributions as dists
 import yaml
 
-with open('../../../projection/parameters/fertility_III.yaml', 'r') as yaml_config:
+with open('../../../parameters/fertility_III.yaml', 'r') as yaml_config:
     fertility_III_config = yaml.safe_load(yaml_config)
 
 

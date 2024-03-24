@@ -3,7 +3,7 @@ from particles import distributions as dists
 from estimation.fertility.fertility_III import ssm_fertility_III
 import yaml
 
-with open('../../../projection/parameters/fertility_III.yaml', 'r') as yaml_config:
+with open('../../../parameters/fertility_III.yaml', 'r') as yaml_config:
     fertility_III_config = yaml.safe_load(yaml_config)
 
 default_prior = dists.StructDist(
