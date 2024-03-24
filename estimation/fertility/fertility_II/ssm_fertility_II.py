@@ -1,23 +1,28 @@
 from particles import state_space_models as ssm
 from particles import distributions as dists
-from projection.fertility.fertility_II.fertility_II import five_year_decrement
+from projection.fertility.fertility_II.fertility_II import five_year_decrement, \
+    from_country_specific_parameters_to_delta
 import yaml
+import numpy as np
 
 with open('../../../projection/parameters/fertility_II.yaml', 'r') as yaml_config:
     fertility_II_config = yaml.safe_load(yaml_config)
 
 
-class fertility_III(ssm.StateSpaceModel):
+class fertility_II(ssm.StateSpaceModel):
     # Assuming constant diffusion
     default_params = fertility_II_config['world']
 
     def PX0(self):
-        raise NotImplementedError
+        return dists.Normal(loc=self.default_params['prior_mu'], scale=self.default_params['prior_sigma'])
 
     def PX(self, t, xp):
-        # need to compute triangle (nabla) values...
+        # need to compute triangle values...
+        delta_c = from_country_specific_parameters_to_delta((self.gamma1_c, self.gamma2_c, self.gamma3_c), self.U_c,
+                                                            self.d_c_star,
+                                                            self.triangle_4c_star)  # country specific values
         return dists.Normal(
-            loc=xp - five_year_decrement(xp, (self.triangle_1c, self.triangle_2c, self.triangle_3c, self.triangle_4c, self.d_c)),
+            loc=xp - five_year_decrement(xp, delta_c),
             scale=self.sigma)  # (t, xp)
 
     def PY(self, t, xp, x):

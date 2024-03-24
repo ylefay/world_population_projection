@@ -2,11 +2,21 @@ import numpy as np
 
 
 def five_year_decrement(fertility_rate, delta_c):
-    nabla_1c, nabla_2c, nabla_3c, nabla_4c, d_c = delta_c
+    triangle_1c, triangle_2c, triangle_3c, triangle_4c, d_c = delta_c
     cst = -2 * np.log(9)
-    _ = d_c * (1 / (1 + np.exp(cst * (fertility_rate - nabla_4c - 0.5 * nabla_3c) / nabla_3c)) - 1 / (
-            1 + np.exp(cst * (fertility_rate - nabla_2c - nabla_3c - nabla_4c + 0.5 * nabla_1c) / nabla_1c)))
+    _ = d_c * (1 / (1 + np.exp(cst * (fertility_rate - triangle_4c - 0.5 * triangle_3c) / triangle_3c)) - 1 / (
+            1 + np.exp(
+        cst * (fertility_rate - triangle_2c - triangle_3c - triangle_4c + 0.5 * triangle_1c) / triangle_1c)))
     return _
+
+
+def from_country_specific_parameters_to_delta(gammas_c, U_c, d_c_star, triangle_4c_star):
+    triangle_4c = (-1. - 2.5 * np.exp(1) ** triangle_4c_star) / (-1. - np.exp(1) ** triangle_4c_star)
+    d_c = (-0.25 - 2.5 * np.exp(1) ** d_c_star) / (-1. - np.exp(1) ** d_c_star)
+    p_cs = np.exp(gammas_c) / np.sum(np.exp(gammas_c))
+    triangle_cs = p_cs * (U_c - triangle_4c)  # for i = 1, 2, 3
+    delta = (*triangle_cs, triangle_4c, d_c)
+    return delta
 
 
 class fertility_II:

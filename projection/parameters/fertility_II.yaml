@@ -1,19 +1,13 @@
-world: #Taken bayesTFR: An R Package for ProbabilisticProjections of the Total Fertility Rate
-  chi:
-  psi_squared:
-  triangle_4:
-  alpha_1:
-  alpha_2:
-  alpha_3:
-  delta_1:
-  delta_2:
-  delta_3:
-  delta_4:
-  a:
-  b:
-  S:
-  sigma_0:
-  c_1976:
-  m_tau:
-  sigma_tau:
-
+world: #Taken from bayesTFR: An R Package for ProbabilisticProjections of the Total Fertility Rate
+  chi0: -1.5
+  psi0: 0.6
+  alpha01: -1.0
+  alpha02: 0.5
+  alpha03: 1.
+  alpha04: 5.
+  delta0: 1.
+  delta40: 0.8
+  triangle40: 0.3
+  # loc. and std for the Normal distribution of the initial TFR rate
+  prior_mu: 6.213884210526316
+  prior_sigma: 0.9091289986745312
