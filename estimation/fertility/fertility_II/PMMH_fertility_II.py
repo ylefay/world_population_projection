@@ -64,7 +64,7 @@ def get_prior(data):
     if tau_c == -np.inf:
         prior['U_c'] = dists.Uniform(np.minimum(5.5, np.max(data)), 8.8)
     else:
-        prior['U_c'] = dists.TruncNormal(mu=data[tau_c], sigma=1, a=0, b=100)
+        prior['U_c'] = dists.Dirac(loc=data[tau_c])
     return dists.StructDist(prior)
 
 

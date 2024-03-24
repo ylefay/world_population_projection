@@ -24,7 +24,7 @@ class fertility_II:
     Fertility dynamic for phase II countries
     """
 
-    def __init__(self, N_samples, initial_fertility, delta_c, sigma):
+    def __init__(self, initial_fertility, delta_c, sigma, N_samples=1):
         self.N_samples = N_samples
         self.path = np.array([initial_fertility]) * N_samples
         self.delta_c = delta_c
