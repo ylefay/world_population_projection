@@ -24,3 +24,309 @@ world: #Taken from bayesTFR: An R Package for ProbabilisticProjections of the To
   S_up: 6.5
   mean_eps_tau0: -0.25
   std_eps_tau0: 0.4
+
+# Finding the beginning of phase II is somewhat difficult, instead we fix the value
+WORLD:
+  tau_c: 20
+Sub-Saharan_Africa:
+  tau_c: 27
+Northern_Africa_and_Western_Asia:
+  tau_c: 14
+Central_and_Southern_Asia:
+  tau_c: 15
+Oceania_(excluding_Australia_and_New_Zealand):
+  tau_c: 12
+Less_developed_regions:
+  tau_c: 18
+Least_developed_countries:
+  tau_c: 32
+Less_developed_regions,_excluding_least_developed_countries:
+  tau_c: 20
+Less_developed_regions,_excluding_China:
+  tau_c: 18
+Land-locked_Developing_Countries_(LLDC):
+  tau_c: 36
+Small_Island_Developing_States_(SIDS):
+  tau_c: 14
+Middle-income_countries:
+  tau_c: 18
+Lower-middle-income_countries:
+  tau_c: 18
+Low-income_countries:
+  tau_c: 38
+No_income_group_available:
+  tau_c: 7
+AFRICA:
+  tau_c: 33
+Eastern_Africa:
+  tau_c: 34
+Burundi:
+  tau_c: 41
+Comoros:
+  tau_c: 33
+Djibouti:
+  tau_c: 22
+Eritrea:
+  tau_c: 37
+Ethiopia:
+  tau_c: 37
+Kenya:
+  tau_c: 25
+Madagascar:
+  tau_c: 22
+Malawi:
+  tau_c: 31
+Mayotte:
+  tau_c: 25
+Mozambique:
+  tau_c: 22
+Réunion:
+  tau_c: 4
+Rwanda:
+  tau_c: 32
+Seychelles:
+  tau_c: 17
+Somalia:
+  tau_c: 48
+South_Sudan:
+  tau_c: 46
+Uganda:
+  tau_c: 39
+United_Republic_of_Tanzania:
+  tau_c: 26
+Zambia:
+  tau_c: 27
+Zimbabwe:
+  tau_c: 23
+Middle_Africa:
+  tau_c: 38
+Angola:
+  tau_c: 36
+Cameroon:
+  tau_c: 30
+Central_African_Republic:
+  tau_c: inf
+Chad:
+  tau_c: 42
+Congo:
+  tau_c: 24
+Democratic_Republic_of_the_Congo:
+  tau_c: 45
+Equatorial_Guinea:
+  tau_c: 42
+Gabon:
+  tau_c: 32
+Sao_Tome_and_Principe:
+  tau_c: 29
+Northern_Africa:
+  tau_c: 12
+Algeria:
+  tau_c: 22
+Egypt:
+  tau_c: 0
+Libya:
+  tau_c: 23
+Morocco:
+  tau_c: 12
+Sudan:
+  tau_c: 22
+Tunisia:
+  tau_c: 17
+Western_Sahara:
+  tau_c: 16
+Southern_Africa:
+  tau_c: 15
+Botswana:
+  tau_c: 29
+Eswatini:
+  tau_c: 28
+Lesotho:
+  tau_c: 28
+Namibia:
+  tau_c: 25
+South_Africa:
+  tau_c: 10
+Western_Africa:
+  tau_c: 29
+Benin:
+  tau_c: 32
+Burkina_Faso:
+  tau_c: 32
+Côte_d'Ivoire:
+  tau_c: 29
+Gambia:
+  tau_c: 39
+Ghana:
+  tau_c: 20
+Guinea:
+  tau_c: 40
+Guinea-Bissau:
+  tau_c: 35
+Liberia:
+  tau_c: 30
+Mali:
+  tau_c: 38
+Mauritania:
+  tau_c: 25
+Niger:
+  tau_c: 35
+Nigeria:
+  tau_c: 28
+Senegal:
+  tau_c: 31
+Sierra_Leone:
+  tau_c: 49
+Togo:
+  tau_c: 25
+Central_Asia:
+  tau_c: 9
+Kazakhstan:
+  tau_c: 10
+Kyrgyzstan:
+  tau_c: 12
+Tajikistan:
+  tau_c: 17
+Turkmenistan:
+  tau_c: 12
+Uzbekistan:
+  tau_c: 14
+Mongolia:
+  tau_c: 17
+Southern_Asia:
+  tau_c: 15
+Afghanistan:
+  tau_c: 48
+India:
+  tau_c: 15
+Nepal:
+  tau_c: 15
+Pakistan:
+  tau_c: 28
+South-Eastern_Asia:
+  tau_c: 15
+Cambodia:
+  tau_c: 34
+Indonesia:
+  tau_c: 15
+Lao_People's_Democratic_Republic:
+  tau_c: 35
+Myanmar:
+  tau_c: 19
+Philippines:
+  tau_c: 0
+Timor-Leste:
+  tau_c: 52
+Western_Asia:
+  tau_c: 11
+Georgia:
+  tau_c: 11
+Iraq:
+  tau_c: 21
+Israel:
+  tau_c: 0
+Jordan:
+  tau_c: 20
+Kuwait:
+  tau_c: 19
+Lebanon:
+  tau_c: 17
+Oman:
+  tau_c: 34
+Saudi_Arabia:
+  tau_c: 25
+State_of_Palestine:
+  tau_c: 0
+Syrian_Arab_Republic:
+  tau_c: 25
+Yemen:
+  tau_c: 35
+Faroe_Islands:
+  tau_c: 15
+Monaco:
+  tau_c: 0
+Caribbean:
+  tau_c: 13
+Dominican_Republic:
+  tau_c: 7
+Grenada:
+  tau_c: 10
+Guadeloupe:
+  tau_c: 12
+Haiti:
+  tau_c: 0
+Saint_Martin_(French_part):
+  tau_c: 19
+United_States_Virgin_Islands:
+  tau_c: 19
+Belize:
+  tau_c: 0
+Guatemala:
+  tau_c: 8
+Honduras:
+  tau_c: 15
+Nicaragua:
+  tau_c: 10
+Panama:
+  tau_c: 12
+Bolivia_(Plurinational_State_of):
+  tau_c: 10
+Ecuador:
+  tau_c: 10
+French_Guiana:
+  tau_c: 15
+Guyana:
+  tau_c: 8
+Paraguay:
+  tau_c: 14
+Peru:
+  tau_c: 13
+Suriname:
+  tau_c: 13
+Venezuela_(Bolivarian_Republic_of):
+  tau_c: 7
+OCEANIA:
+  tau_c: 10
+Melanesia:
+  tau_c: 12
+Fiji:
+  tau_c: 8
+New_Caledonia:
+  tau_c: 20
+Papua_New_Guinea:
+  tau_c: 20
+Solomon_Islands:
+  tau_c: 25
+Vanuatu:
+  tau_c: 0
+Micronesia:
+  tau_c: 10
+Guam:
+  tau_c: 6
+Kiribati:
+  tau_c: 10
+Marshall_Islands:
+  tau_c: 17
+Micronesia_(Fed._States_of):
+  tau_c: 21
+Nauru:
+  tau_c: 13
+Northern_Mariana_Islands:
+  tau_c: 20
+Palau:
+  tau_c: 15
+Polynesia:
+  tau_c: 14
+American_Samoa:
+  tau_c: 15
+Cook_Islands:
+  tau_c: 15
+Niue:
+  tau_c: 15
+Samoa:
+  tau_c: 15
+Tokelau:
+  tau_c: 8
+Tonga:
+  tau_c: 10
+Tuvalu:
+  tau_c: 0

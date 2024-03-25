@@ -4,6 +4,7 @@ from estimation.fertility.fertility_II import ssm_fertility_II
 import numpy as np
 import yaml
 from scipy.signal import find_peaks
+from numbers import Number
 
 with open('../../../parameters/fertility_II.yaml', 'r') as yaml_config:
     fertility_II_config = yaml.safe_load(yaml_config)
@@ -65,18 +66,23 @@ def get_tau_c(data):
     return np.argmax(_)
 
 
-def get_prior(data):
+def get_prior(data, **kwargs):
     prior = default_prior.copy()
-    tau_c = get_tau_c(data)
-    if tau_c == -np.inf:
-        prior['U_c'] = dists.Uniform(np.minimum(5.5, np.max(data)), 8.8)
-    else:
+    tau_c = kwargs.pop('tau_c', get_tau_c(data))
+    if isinstance(tau_c, Number):
         prior['U_c'] = dists.Dirac(loc=data[tau_c])
+    else:
+        prior['U_c'] = dists.Uniform(np.minimum(5.5, np.max(data)), 8.8)
     return dists.StructDist(prior)
 
 
-def run_PMMH(data, N_particles=200, niter=1000):
-    prior = get_prior(data)
-    pmmh = mcmc.PMMH(ssm_cls=ssm_fertility_II.fertility_II, data=data, prior=prior, Nx=N_particles, niter=niter)
+def run_PMMH(data, N_particles=200, niter=1000, **kwargs):
+    default_params = fertility_II_config['world']
+    default_params['t0'] = kwargs.pop('t0', 1950)
+    default_params['tau_c'] = kwargs.get('tau_c', get_tau_c(data))
+    prior = get_prior(data, **kwargs)
+
+    pmmh = mcmc.PMMH(ssm_cls=ssm_fertility_II.get_fertility_II_class(default_params), data=data,
+                     prior=prior, Nx=N_particles, niter=niter)
     pmmh.run()
     return pmmh
