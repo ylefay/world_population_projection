@@ -11,3 +11,16 @@ world: #Taken from bayesTFR: An R Package for ProbabilisticProjections of the To
   # loc. and std for the Normal distribution of the initial TFR rate
   prior_mu: 6.213884210526316
   prior_sigma: 0.9091289986745312
+  # parameters for the prior on the variance
+  a_low: 0.
+  a_up: 0.2
+  b_low: 0.
+  b_up: 0.2
+  sigma0_low: 0.01
+  sigma0_up: 0.6
+  const_low: 0.8
+  const_up: 2.
+  S_low: 3.5
+  S_up: 6.5
+  mean_eps_tau0: -0.25
+  std_eps_tau0: 0.4

@@ -1,8 +1,9 @@
 from particles import state_space_models as ssm
 from particles import distributions as dists
 from projection.fertility.fertility_II.fertility_II import five_year_decrement, \
-    from_country_specific_parameters_to_delta
+    from_country_specific_parameters_to_delta, fun_sigma
 import yaml
+import numpy as np
 
 with open('../../../parameters/fertility_II.yaml', 'r') as yaml_config:
     fertility_II_config = yaml.safe_load(yaml_config)
@@ -11,6 +12,7 @@ with open('../../../parameters/fertility_II.yaml', 'r') as yaml_config:
 class fertility_II(ssm.StateSpaceModel):
     # Assuming constant diffusion
     default_params = fertility_II_config['world']
+    default_params['t0'] = 1972 #pour l'instant..
 
     def PX0(self):
         return dists.Normal(loc=self.default_params['prior_mu'], scale=self.default_params['prior_sigma'])
@@ -22,7 +24,7 @@ class fertility_II(ssm.StateSpaceModel):
                                                             self.triangle_4c_star)  # country specific values
         return dists.Normal(
             loc=xp - five_year_decrement(xp, delta_c),
-            scale=self.sigma2**0.5)  # (t, xp)
+            scale=np.abs(fun_sigma(self.c1975, self.sigma0, self.S, self.a, self.b, t + self.t0, xp)))  # (t, xp)
 
     def PY(self, t, xp, x):
         return dists.Normal(loc=x, scale=0.02)

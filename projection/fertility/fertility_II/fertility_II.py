@@ -1,4 +1,8 @@
 import numpy as np
+import yaml
+
+with open('../../../parameters/fertility_III.yaml', 'r') as yaml_config:
+    fertility_III_config = yaml.safe_load(yaml_config)
 
 
 def five_year_decrement(fertility_rate, delta_c):
@@ -6,7 +10,8 @@ def five_year_decrement(fertility_rate, delta_c):
     cst = -2 * np.log(9)
     _ = d_c * (1 / (1 + np.exp(cst * (fertility_rate - triangle_4c - 0.5 * triangle_3c) / triangle_3c)) - 1 / (
             1 + np.exp(
-        cst * (fertility_rate - triangle_2c - triangle_3c - triangle_4c + 0.5 * triangle_1c) / triangle_1c)))
+        cst * (
+                fertility_rate - triangle_1c - triangle_2c - triangle_3c - triangle_4c + 0.5 * triangle_1c) / triangle_1c)))
     return _
 
 
@@ -19,25 +24,48 @@ def from_country_specific_parameters_to_delta(gammas_c, U_c, d_c_star, triangle_
     return delta
 
 
+def fun_sigma(c1975, sigma0, S, a, b, t, fertility_rate):
+    if isinstance(fertility_rate, float):
+        fertility_rate = np.array([fertility_rate])
+    S = np.ones(fertility_rate.shape) * S
+    cond1 = S <= fertility_rate
+    cond2 = fertility_rate <= S
+    c_1975t = c1975 if t <= 1975 else 1.0
+    _ = -a * cond1 + b * cond2
+    return c_1975t * (sigma0 + (fertility_rate - S) * _)
+
+
 class fertility_II:
     """
     Fertility dynamic for phase II countries
     """
 
-    def __init__(self, initial_fertility, delta_c, sigma, N_samples=1):
-        self.N_samples = N_samples
-        self.path = np.array([initial_fertility]) * N_samples
+    def __init__(self, initial_fertility, delta_c, c1975, sigma0, S, a, b, t0):
+        self.path = np.array([initial_fertility])
         self.delta_c = delta_c
-        self.sigma = sigma
+        self.t0 = t0
+        self.c1975 = c1975
+        self.sigma0 = sigma0
+        self.S = S
+        self.a = a
+        self.b = b
+        self.phaseIII = False
 
     def run(self):
         """
         Run the model for one year
         """
-        sigma = np.vectorize(lambda x: self.sigma(self.path.shape[0], x))(self.path[-1, :])
-        noise = sigma * np.random.multivariate_normal(0., scale=np.eye(self.N_samples))
-        five_year_decrements = np.vectorize(lambda x: five_year_decrement(x, self.delta_c))(self.path[-1, :])
-        self.path = np.append(self.path, self.path[-1, :] - five_year_decrements + noise, axis=0)
+        if not self.phaseIII:
+            sigma = fun_sigma(self.c1975, self.sigma0, self.S, self.a, self.b, self.t0 + self.path.shape[0],
+                              self.path[-1])
+            noise = sigma * np.random.normal(loc=0., scale=1.0)
+            five_year_decrements = five_year_decrement(self.path[-1], self.delta_c)
+            self.path = np.append(self.path, self.path[-1] - five_year_decrements + noise, axis=0)
+            self.phaseIII = self.path[-1] <= 2.0
+        else:
+            self.path = np.append(self.path, [fertility_III_config['world']['mu'] + fertility_III_config['world']['rho'] * (
+                        self.path[-1] - fertility_III_config['world']['mu']) + fertility_III_config['world'][
+                                                  'sigma_b'] * np.random.normal(loc=0., scale=1.0)], axis=0)
 
     def simulate(self, n_years):
         """

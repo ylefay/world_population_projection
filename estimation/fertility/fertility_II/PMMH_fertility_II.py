@@ -32,7 +32,14 @@ default_prior = {  # First defining the prior on the world-level parameters
     'd_c_star': dists.Cond(lambda theta: dists.Normal(loc=theta['chi'], scale=theta['psi2'] ** 0.5)),
     'triangle_4c_star': dists.Cond(
         lambda theta: dists.Normal(loc=theta['triangle_4'], scale=theta['delta_4sq'] ** 0.5)),
-    'sigma2': dists.InvGamma()
+    'a': dists.Uniform(fertility_II_config['world']['a_low'], fertility_II_config['world']['a_up']),
+    'b': dists.Uniform(fertility_II_config['world']['b_low'], fertility_II_config['world']['b_up']),
+    'sigma0': dists.Uniform(fertility_II_config['world']['sigma0_low'], fertility_II_config['world']['sigma0_up']),
+    'c1975': dists.Uniform(fertility_II_config['world']['const_low'], fertility_II_config['world']['const_up']),
+    'S': dists.Uniform(fertility_II_config['world']['S_low'], fertility_II_config['world']['S_up']),
+    'm_tau': dists.Normal(loc=fertility_II_config['world']['mean_eps_tau0'],
+                          scale=fertility_II_config['world']['std_eps_tau0']),
+    's_tausq': dists.InvGamma(a=1.0, b=1 / fertility_II_config['world']['std_eps_tau0'] ** 2),
 }
 
 
