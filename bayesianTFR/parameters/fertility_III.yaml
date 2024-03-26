@@ -7,3 +7,8 @@ world:
   mu_bar_up: 2.1 # upper bound for the uniform prior on mu_bar
   sigma_mu_up: 0.318 # upper bound for the uniform prior on sigma_mu
   sigma_rho_up: 0.289 # upper bound for the uniform prior on sigma_rho
+  # for technical reason, we initialize default values for the following conditional priors
+  # mu_bar: 2.1 #1.05
+  # sigma_mu: 0.318 #0.159
+  # sigma_rho: 0.289 #0.1445
+  # rho_bar: 1.0 #0.5"""

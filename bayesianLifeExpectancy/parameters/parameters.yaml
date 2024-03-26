@@ -1,0 +1,20 @@
+world:
+  # medium-pace model
+  a1: 15.77
+  a2: 40.97
+  a3: 0.21
+  a4: 19.82
+  a5: 2.93
+  a6: 0.4
+  delta_1_sq:
+  delta_2_sq:
+  delta_3_sq:
+  delta_4_sq:
+  delta_5_sq:
+  delta_6_sq:
+  rate_1: 15.6
+  rate_2: 23.5
+  rate_3: 14.5
+  rate_4: 14.7
+  rate_5: 3.5
+  rate_6: 0.6

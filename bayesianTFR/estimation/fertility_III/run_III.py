@@ -17,10 +17,10 @@ def run(country):
     DATA = TFR_OF_STAGE_III_COUNTRIES[TFR_OF_STAGE_III_COUNTRIES['Region'] == country]['TFR']
     DATA = np.array(DATA)
 
-    my_pmmh = PMMH_fertility_III.run_PMMH(DATA, niter=1000, N_particles=100)
+    my_chain = PMMH_fertility_III.run_PMMH(DATA, niter=1000, N_particles=100)
 
     with open(f'{SAVING_FILE}', 'wb') as handle:
-        pickle.dump(my_pmmh.chain, handle, protocol=pickle.HIGHEST_PROTOCOL)
+        pickle.dump(my_chain, handle, protocol=pickle.HIGHEST_PROTOCOL)
 
 
 if __name__ == "__main__":

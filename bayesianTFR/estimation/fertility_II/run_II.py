@@ -25,10 +25,10 @@ def run(country):
     DATA = np.array(DATA)
 
     kwargs = {'t0': starting_period, 'tau_c': fertility_II_config[country]['tau_c']}
-    my_pmmh = PMMH_fertility_II.run_PMMH(DATA, niter=1000, N_particles=100, **kwargs)
+    my_chain = PMMH_fertility_II.run_PMMH(DATA, niter=1000, N_particles=100, **kwargs)
 
     with open(f'{SAVING_FILE}', 'wb') as handle:
-        pickle.dump(my_pmmh.chain, handle, protocol=pickle.HIGHEST_PROTOCOL)
+        pickle.dump(my_chain, handle, protocol=pickle.HIGHEST_PROTOCOL)
 
 
 if __name__ == "__main__":

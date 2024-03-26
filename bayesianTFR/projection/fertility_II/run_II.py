@@ -10,7 +10,8 @@ import yaml
 LIST_OF_STAGE_II_COUNTRIES = pd.read_csv("../../data/UN/countries_in_stage_II.csv")
 SAVING_FILE_PREFIX = "../../output/projection/fertility_II/MC_fertility_"  # Add the country name to this prefix
 TFR_OF_STAGE_II_COUNTRIES = pd.read_csv("../../data/UN/TFR_per_country_stage_II.csv")
-POSTERIOR_DISTRIBUTION_OF_PARAMETERS_PREFIX = "../../../output/estimation/fertility_II/PMMH_fertility_II_"
+POSTERIOR_DISTRIBUTION_OF_PARAMETERS_PREFIX = "../../output/estimation/fertility_II/PMMH_fertility_II_"
+
 with open('../../parameters/fertility_II.yaml', 'r') as yaml_config:
     fertility_II_config = yaml.safe_load(yaml_config)
 
@@ -35,12 +36,12 @@ def run(country):
     initial_fertility = DATA[-1]
     simulations = []
     for i in range(N_samples):
-        S, U_c, a, alpha_1, alpha_2, alpha_3, b, c1975, chi, d_c_star, delta_1sq, delta_2sq, delta_3sq, delta_4sq, gamma1_c, gamma2_c, gamma3_c, m_tau, phi, psi2, s_tausq, sigma0, triangle_4, triangle_4c_star = \
-            thetas[i]
+        triangle_4, delta_4sq, delta_3sq, delta_2sq, delta_1sq, alpha_1, alpha_2, alpha_3, psi2, chi, a, b, sigma0, c1975, S, m_tau, s_tausq, gamma1_c, gamma2_c, gamma3_c, d_c_star, triangle_4c_star, U_c = \
+        thetas[i]
         delta_c = from_country_specific_parameters_to_delta((gamma1_c, gamma2_c, gamma3_c), U_c, d_c_star,
                                                             triangle_4c_star)
         simulations.append(fertility_II.fertility_II(initial_fertility, delta_c, c1975, sigma0, S, a, b,
-                                                     fertility_II_config[country]['tau_c'], s_tausq, starting_date, phi))
+                                                     fertility_II_config[country]['tau_c'], s_tausq, starting_date))
     for simulation in simulations:
         simulation.simulate(N_years_ahead)
 

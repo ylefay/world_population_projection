@@ -10,9 +10,6 @@ with open('../../parameters/fertility_II.yaml', 'r') as yaml_config:
 
 def get_fertility_II_class(_default_params):
     class fertility_II(ssm.StateSpaceModel):
-        # Assuming constant diffusion
-        # default_params = fertility_II_config['world']
-        # default_params['t0'] = 1972 #pour l'instant..
         default_params = _default_params
 
         def PX0(self):

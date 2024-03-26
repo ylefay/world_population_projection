@@ -1,7 +1,8 @@
 import numpy as np
 import yaml
 
-with open('../../parameters/fertility_III.yaml', 'r') as yaml_config:
+with open('/home/grothendieck/world_population_projection/bayesianTFR/parameters/fertility_III.yaml',
+          'r') as yaml_config:
     fertility_III_config = yaml.safe_load(yaml_config)
 
 
@@ -16,7 +17,7 @@ def decrement(fertility_rate, delta_c):
 
 
 def from_country_specific_parameters_to_delta(gammas_c, U_c, d_c_star, triangle_4c_star):
-    triangle_4c = (-1. - 2.5 * np.exp(1) ** triangle_4c_star) / (-1. - np.exp(1) ** triangle_4c_star)
+    triangle_4c = (-1. - 2.5 * np.exp(triangle_4c_star)) / (-1. - np.exp(triangle_4c_star))
     d_c = (-0.05 - 0.5 * np.exp(d_c_star)) / (-1. - np.exp(d_c_star))
     p_cs = np.exp(gammas_c) / np.sum(np.exp(gammas_c))
     triangle_cs = p_cs * (U_c - triangle_4c)  # for i = 1, 2, 3
@@ -43,7 +44,7 @@ class fertility_II:
     Fertility dynamic for phase II countries
     """
 
-    def __init__(self, initial_fertility, delta_c, c1975, sigma0, S, a, b, tau_c, s_tausq, t0, phi):
+    def __init__(self, initial_fertility, delta_c, c1975, sigma0, S, a, b, tau_c, s_tausq, t0):
         self.path = np.array([initial_fertility])
         self.delta_c = delta_c
         self.t0 = t0
@@ -54,7 +55,6 @@ class fertility_II:
         self.b = b
         self.s_tausq = s_tausq
         self.tau_c = tau_c
-        self.phi = phi
         self.phaseIII = False
 
     def run(self):
@@ -66,18 +66,18 @@ class fertility_II:
                               self.t0 + self.path.shape[0],
                               self.path[-1])
             noise = sigma * np.random.normal(loc=0., scale=1.0)
-            #if len(self.path) > 1:  # pas propre
+            # if len(self.path) > 1:  # pas propre
             #    noise += self.phi * (
             #            self.path[-1] - self.path[-2] + decrement(self.path[-2], self.delta_c))
             decrements = decrement(self.path[-1], self.delta_c)
             self.path = np.append(self.path, self.path[-1] - decrements + noise, axis=0)
             self.phaseIII = self.path[-1] <= 2.0 and self.path[-2] <= 2.0
         else:
+            new = fertility_III_config['world']['mu'] + fertility_III_config['world']['rho'] * (
+                    self.path[-1] - fertility_III_config['world']['mu']) + fertility_III_config['world'][
+                      'sigma_b'] * np.random.normal(loc=0., scale=1.0)
             self.path = np.append(self.path,
-                                  [fertility_III_config['world']['mu'] + fertility_III_config['world']['rho'] * (
-                                          self.path[-1] - fertility_III_config['world']['mu']) +
-                                   fertility_III_config['world'][
-                                       'sigma_b'] * np.random.normal(loc=0., scale=1.0)], axis=0)
+                                  [new if new > 0 else 0.], axis=0)
 
     def simulate(self, n_years):
         """

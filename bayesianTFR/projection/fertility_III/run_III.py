@@ -27,7 +27,11 @@ def run(country):
     theta_samples = theta_samples[int(BURN_IN_ratio * len(theta_samples)):]
     thetas = theta_samples[np.random.choice(len(theta_samples), size=N_samples, replace=False)]
     initial_fertility = DATA[-1]
-    simulations = [fertility_III.fertility_III(initial_fertility, *tuple(thetas[i])) for i in range(N_samples)]
+    simulations = []
+    for i in range(N_samples):
+        mu_bar, sigma_mu, rho_bar, sigma_rho, sigma_eps, mu, rho = thetas[i]
+        simulations.append(
+            fertility_III.fertility_III(initial_fertility, mu, mu_bar, rho, rho_bar, sigma_mu, sigma_rho, sigma_eps))
     for simulation in simulations:
         simulation.simulate(N_years_ahead)
 

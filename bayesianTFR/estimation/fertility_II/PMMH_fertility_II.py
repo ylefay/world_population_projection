@@ -5,11 +5,12 @@ import numpy as np
 import yaml
 from scipy.signal import find_peaks
 from numbers import Number
+from collections import OrderedDict
 
 with open('../../parameters/fertility_II.yaml', 'r') as yaml_config:
     fertility_II_config = yaml.safe_load(yaml_config)
 
-default_prior = {  # First defining the prior on the world-level parameters
+default_prior = OrderedDict({  # First defining the prior on the world-level parameters
     'triangle_4': dists.Normal(loc=fertility_II_config['world']['triangle40'],
                                scale=fertility_II_config['world']['delta40']),
     'delta_4sq': dists.InvGamma(a=1.0, b=1 / fertility_II_config['world']['delta40'] ** 2),
@@ -27,12 +28,7 @@ default_prior = {  # First defining the prior on the world-level parameters
     'psi2': dists.InvGamma(a=1.0, b=1 / fertility_II_config['world']['psi0'] ** 2),
     'chi': dists.Normal(loc=fertility_II_config['world']['chi0'], scale=fertility_II_config['world']['psi0']),
     # now defining the prior on the country-specific parameters
-    'gamma1_c': dists.Cond(lambda theta: dists.Normal(loc=theta['alpha_1'], scale=theta['delta_1sq'] ** 0.5)),
-    'gamma2_c': dists.Cond(lambda theta: dists.Normal(loc=theta['alpha_2'], scale=theta['delta_2sq'] ** 0.5)),
-    'gamma3_c': dists.Cond(lambda theta: dists.Normal(loc=theta['alpha_3'], scale=theta['delta_3sq'] ** 0.5)),
-    'd_c_star': dists.Cond(lambda theta: dists.Normal(loc=theta['chi'], scale=theta['psi2'] ** 0.5)),
-    'triangle_4c_star': dists.Cond(
-        lambda theta: dists.Normal(loc=theta['triangle_4'], scale=theta['delta_4sq'] ** 0.5)),
+
     'a': dists.Uniform(fertility_II_config['world']['a_low'], fertility_II_config['world']['a_up']),
     'b': dists.Uniform(fertility_II_config['world']['b_low'], fertility_II_config['world']['b_up']),
     'sigma0': dists.Uniform(fertility_II_config['world']['sigma0_low'], fertility_II_config['world']['sigma0_up']),
@@ -42,7 +38,13 @@ default_prior = {  # First defining the prior on the world-level parameters
                           scale=fertility_II_config['world']['std_eps_tau0']),
     's_tausq': dists.InvGamma(a=1.0, b=1 / fertility_II_config['world']['std_eps_tau0'] ** 2),
     # 'phi': dists.Uniform(a=0., b=1.0)
-}
+    'gamma1_c': dists.Cond(lambda theta: dists.Normal(loc=theta['alpha_1'], scale=theta['delta_1sq'] ** 0.5)),
+    'gamma2_c': dists.Cond(lambda theta: dists.Normal(loc=theta['alpha_2'], scale=theta['delta_2sq'] ** 0.5)),
+    'gamma3_c': dists.Cond(lambda theta: dists.Normal(loc=theta['alpha_3'], scale=theta['delta_3sq'] ** 0.5)),
+    'd_c_star': dists.Cond(lambda theta: dists.Normal(loc=theta['chi'], scale=theta['psi2'] ** 0.5)),
+    'triangle_4c_star': dists.Cond(
+        lambda theta: dists.Normal(loc=theta['triangle_4'], scale=theta['delta_4sq'] ** 0.5)),
+})
 
 
 def get_tau_c(data):
@@ -71,20 +73,30 @@ def get_prior(data, **kwargs):
     prior = default_prior.copy()
     tau_c = kwargs.pop('tau_c', get_tau_c(data))
     if isinstance(tau_c, Number):
-        prior['U_c'] = dists.Dirac(loc=data[tau_c])
+        prior['U_c'] = dists.Uniform(a=max(0., data[tau_c] - 1.65), b=data[tau_c] + 1.65)
     else:
         prior['U_c'] = dists.Uniform(np.minimum(5.5, np.max(data)), 8.8)
     return dists.StructDist(prior)
 
 
-def run_PMMH(data, N_particles=200, niter=1000, **kwargs):
+TRY = 10
+
+
+def run_PMMH(data, N_particles=100, niter=1000, TRY=10, **kwargs):
     default_params = fertility_II_config['world']
     default_params['t0'] = kwargs.pop('t0', 1950)
     default_params['tau_c'] = kwargs.get('tau_c', get_tau_c(data))
 
     prior = get_prior(data, **kwargs)
-
-    pmmh = mcmc.PMMH(ssm_cls=ssm_fertility_II.get_fertility_II_class(default_params), data=data,
-                     prior=prior, Nx=N_particles, niter=niter)
-    pmmh.run()
-    return pmmh
+    L = -np.inf
+    for i in range(TRY):
+        pmmh = mcmc.PMMH(ssm_cls=ssm_fertility_II.get_fertility_II_class(default_params), data=data,
+                         prior=prior, Nx=N_particles, niter=niter)
+        pmmh.run()
+        if pmmh.chain.lpost[-1] > L:
+            L = pmmh.chain.lpost[-1]
+            best_chain = pmmh.chain
+        if L > 0:
+            break
+    print("log-likelihood:", L)
+    return best_chain
