@@ -241,3 +241,5 @@ dmypy.json
 # Cython debug symbols
 cython_debug/
 
+/bayesianLifeExpectancy/data/UN/WPP2022_MORT_F05_1_LIFE_EXPECTANCY_BY_AGE_BOTH_SEXES.csv
+/bayesianLifeExpectancy/data/UN/WPP2022_MORT_F05_1_LIFE_EXPECTANCY_BY_AGE_BOTH_SEXES.xlsx
