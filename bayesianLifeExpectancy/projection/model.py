@@ -29,7 +29,7 @@ def sigma(life_expectancy):
     sigma(l) = 1.25 - (l-30)/50 * 1.15,
     such that sigma(30) = 1.25 and sigma(80) = 0.1
     """
-    return np.abs(1.25 - (life_expectancy - 30) / 50 * 1.15)
+    return np.maximum((1.25 - (life_expectancy - 30) / 50 * 1.15), 0.1)
 
 
 class LifeExpectancy:
@@ -37,13 +37,15 @@ class LifeExpectancy:
     Life expectancy model: a double logistic regression for the decrement function
     """
 
-    def __init__(self, initial_LE, theta_c):
+    def __init__(self, initial_LE, theta_c, omega):
         self.path = np.array([initial_LE])
         self.theta_c = theta_c
+        self.omega = omega
 
     def run(self):
         self.path = np.append(self.path, [
-            self.path[-1] + np.random.normal(loc=decrement(self.path[-1], self.theta_c), scale=sigma(self.path[-1]))
+            self.path[-1] + np.random.normal(loc=decrement(self.path[-1], self.theta_c),
+                                             scale=self.omega * sigma(self.path[-1]))
         ])
 
     def simulate(self, n_year):

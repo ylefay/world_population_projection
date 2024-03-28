@@ -10,4 +10,6 @@ dataframe.drop(
      '100+'], axis=1, inplace=True)
 dataframe.rename(columns={'0': 'LE', 'Region, subregion, country or area *': 'Region'}, inplace=True)
 dataframe.dropna(inplace=True)
+dataframe['Region'] = dataframe['Region'].str.replace("/", "_")
+dataframe['Region'] = dataframe['Region'].str.replace(" ", "_")
 dataframe.to_csv('LE_per_country.csv', index=False)

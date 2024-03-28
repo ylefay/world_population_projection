@@ -1,28 +1,28 @@
 Region
 WORLD
-Sub-Saharan Africa
-Northern Africa and Western Asia
-Central and Southern Asia
-Eastern and South-Eastern Asia
-Latin America and the Caribbean
-Oceania (excluding Australia and New Zealand)
-Australia/New Zealand
-Europe and Northern America
-More developed regions
-Less developed regions
-Least developed countries
-"Less developed regions, excluding least developed countries"
-"Less developed regions, excluding China"
-Land-locked Developing Countries (LLDC)
-Small Island Developing States (SIDS)
-High-income countries
-Middle-income countries
-Upper-middle-income countries
-Lower-middle-income countries
-Low-income countries
-No income group available
+Sub-Saharan_Africa
+Northern_Africa_and_Western_Asia
+Central_and_Southern_Asia
+Eastern_and_South-Eastern_Asia
+Latin_America_and_the_Caribbean
+Oceania_(excluding_Australia_and_New_Zealand)
+Australia_New_Zealand
+Europe_and_Northern_America
+More_developed_regions
+Less_developed_regions
+Least_developed_countries
+"Less_developed_regions,_excluding_least_developed_countries"
+"Less_developed_regions,_excluding_China"
+Land-locked_Developing_Countries_(LLDC)
+Small_Island_Developing_States_(SIDS)
+High-income_countries
+Middle-income_countries
+Upper-middle-income_countries
+Lower-middle-income_countries
+Low-income_countries
+No_income_group_available
 AFRICA
-Eastern Africa
+Eastern_Africa
 Burundi
 Comoros
 Djibouti
@@ -38,40 +38,40 @@ Réunion
 Rwanda
 Seychelles
 Somalia
-South Sudan
+South_Sudan
 Uganda
-United Republic of Tanzania
+United_Republic_of_Tanzania
 Zambia
 Zimbabwe
-Middle Africa
+Middle_Africa
 Angola
 Cameroon
-Central African Republic
+Central_African_Republic
 Chad
 Congo
-Democratic Republic of the Congo
-Equatorial Guinea
+Democratic_Republic_of_the_Congo
+Equatorial_Guinea
 Gabon
-Sao Tome and Principe
-Northern Africa
+Sao_Tome_and_Principe
+Northern_Africa
 Algeria
 Egypt
 Libya
 Morocco
 Sudan
 Tunisia
-Western Sahara
-Southern Africa
+Western_Sahara
+Southern_Africa
 Botswana
 Eswatini
 Lesotho
 Namibia
-South Africa
-Western Africa
+South_Africa
+Western_Africa
 Benin
-Burkina Faso
-Cabo Verde
-Côte d'Ivoire
+Burkina_Faso
+Cabo_Verde
+Côte_d'Ivoire
 Gambia
 Ghana
 Guinea
@@ -81,49 +81,49 @@ Mali
 Mauritania
 Niger
 Nigeria
-Saint Helena
+Saint_Helena
 Senegal
-Sierra Leone
+Sierra_Leone
 Togo
 ASIA
-Central Asia
+Central_Asia
 Kazakhstan
 Kyrgyzstan
 Tajikistan
 Turkmenistan
 Uzbekistan
-Eastern Asia
+Eastern_Asia
 China
-"China, Hong Kong SAR"
-"China, Macao SAR"
-"China, Taiwan Province of China"
-Dem. People's Republic of Korea
+"China,_Hong_Kong_SAR"
+"China,_Macao_SAR"
+"China,_Taiwan_Province_of_China"
+Dem._People's_Republic_of_Korea
 Japan
 Mongolia
-Republic of Korea
-Southern Asia
+Republic_of_Korea
+Southern_Asia
 Afghanistan
 Bangladesh
 Bhutan
 India
-Iran (Islamic Republic of)
+Iran_(Islamic_Republic_of)
 Maldives
 Nepal
 Pakistan
-Sri Lanka
-South-Eastern Asia
-Brunei Darussalam
+Sri_Lanka
+South-Eastern_Asia
+Brunei_Darussalam
 Cambodia
 Indonesia
-Lao People's Democratic Republic
+Lao_People's_Democratic_Republic
 Malaysia
 Myanmar
 Philippines
 Singapore
 Thailand
 Timor-Leste
-Viet Nam
-Western Asia
+Viet_Nam
+Western_Asia
 Armenia
 Azerbaijan
 Bahrain
@@ -136,57 +136,57 @@ Kuwait
 Lebanon
 Oman
 Qatar
-Saudi Arabia
-State of Palestine
-Syrian Arab Republic
+Saudi_Arabia
+State_of_Palestine
+Syrian_Arab_Republic
 Türkiye
-United Arab Emirates
+United_Arab_Emirates
 Yemen
 EUROPE
-Eastern Europe
+Eastern_Europe
 Belarus
 Bulgaria
 Czechia
 Hungary
 Poland
-Republic of Moldova
+Republic_of_Moldova
 Romania
-Russian Federation
+Russian_Federation
 Slovakia
 Ukraine
-Northern Europe
+Northern_Europe
 Denmark
 Estonia
-Faroe Islands
+Faroe_Islands
 Finland
 Guernsey
 Iceland
 Ireland
-Isle of Man
+Isle_of_Man
 Jersey
 Latvia
 Lithuania
 Norway
 Sweden
-United Kingdom
-Southern Europe
+United_Kingdom
+Southern_Europe
 Albania
 Andorra
-Bosnia and Herzegovina
+Bosnia_and_Herzegovina
 Croatia
 Gibraltar
 Greece
 Italy
-Kosovo (under UNSC res. 1244)
+Kosovo_(under_UNSC_res._1244)
 Malta
 Montenegro
-North Macedonia
+North_Macedonia
 Portugal
-San Marino
+San_Marino
 Serbia
 Slovenia
 Spain
-Western Europe
+Western_Europe
 Austria
 Belgium
 France
@@ -196,91 +196,91 @@ Luxembourg
 Monaco
 Netherlands
 Switzerland
-LATIN AMERICA AND THE CARIBBEAN
+LATIN_AMERICA_AND_THE_CARIBBEAN
 Caribbean
 Anguilla
-Antigua and Barbuda
+Antigua_and_Barbuda
 Aruba
 Bahamas
 Barbados
-"Bonaire, Sint Eustatius and Saba"
-British Virgin Islands
-Cayman Islands
+"Bonaire,_Sint_Eustatius_and_Saba"
+British_Virgin_Islands
+Cayman_Islands
 Cuba
 Curaçao
 Dominica
-Dominican Republic
+Dominican_Republic
 Grenada
 Guadeloupe
 Haiti
 Jamaica
 Martinique
 Montserrat
-Puerto Rico
-Saint Barthélemy
-Saint Kitts and Nevis
-Saint Lucia
-Saint Martin (French part)
-Saint Vincent and the Grenadines
-Sint Maarten (Dutch part)
-Trinidad and Tobago
-Turks and Caicos Islands
-United States Virgin Islands
-Central America
+Puerto_Rico
+Saint_Barthélemy
+Saint_Kitts_and_Nevis
+Saint_Lucia
+Saint_Martin_(French_part)
+Saint_Vincent_and_the_Grenadines
+Sint_Maarten_(Dutch_part)
+Trinidad_and_Tobago
+Turks_and_Caicos_Islands
+United_States_Virgin_Islands
+Central_America
 Belize
-Costa Rica
-El Salvador
+Costa_Rica
+El_Salvador
 Guatemala
 Honduras
 Mexico
 Nicaragua
 Panama
-South America
+South_America
 Argentina
-Bolivia (Plurinational State of)
+Bolivia_(Plurinational_State_of)
 Brazil
 Chile
 Colombia
 Ecuador
-Falkland Islands (Malvinas)
-French Guiana
+Falkland_Islands_(Malvinas)
+French_Guiana
 Guyana
 Paraguay
 Peru
 Suriname
 Uruguay
-Venezuela (Bolivarian Republic of)
-NORTHERN AMERICA
+Venezuela_(Bolivarian_Republic_of)
+NORTHERN_AMERICA
 Bermuda
 Canada
 Greenland
-Saint Pierre and Miquelon
-United States of America
+Saint_Pierre_and_Miquelon
+United_States_of_America
 OCEANIA
-Australia/New Zealand
+Australia_New_Zealand
 Australia
-New Zealand
+New_Zealand
 Melanesia
 Fiji
-New Caledonia
-Papua New Guinea
-Solomon Islands
+New_Caledonia
+Papua_New_Guinea
+Solomon_Islands
 Vanuatu
 Micronesia
 Guam
 Kiribati
-Marshall Islands
-Micronesia (Fed. States of)
+Marshall_Islands
+Micronesia_(Fed._States_of)
 Nauru
-Northern Mariana Islands
+Northern_Mariana_Islands
 Palau
 Polynesia
-American Samoa
-Cook Islands
-French Polynesia
+American_Samoa
+Cook_Islands
+French_Polynesia
 Niue
 Samoa
 Tokelau
 Tonga
 Tuvalu
-Wallis and Futuna Islands
+Wallis_and_Futuna_Islands

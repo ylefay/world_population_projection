@@ -1,24 +1,24 @@
 world:
-  # medium-pace model
-  a1: 15.77
-  a2: 40.97
-  a3: 0.21
-  a4: 19.82
-  a5: 2.93
-  a6: 0.4
-  # UN medium-pace model, however, I wasn't able to find the values
-  delta_1_sq: 1.0
-  delta_2_sq: 1.0
-  delta_3_sq: 1.0
-  delta_4_sq: 1.0
-  delta_5_sq: 1.0
-  delta_6_sq: 1.0
-  rate_1: 15.6
-  rate_2: 23.5
-  rate_3: 14.5
-  rate_4: 14.7
-  rate_5: 3.5
-  rate_6: 0.6
+  # medium-pace model option A in DLpriors.rda
+  a1: 13.2357
+  a2: 40.9756
+  a3: 9.3015
+  a4: 18.4122
+  a5: 2.9442
+  a6: 0.5481
+  # UN medium-pace model, from bayesLife R package, file DLpriors.rda
+  delta_1_sq: 15.5882 #(3.9482**2)
+  delta_2_sq: 26.6968
+  delta_3_sq: 135.5408
+  delta_4_sq: 49.3843
+  delta_5_sq: 9.3556
+  delta_6_sq: 0.2542
+  rate_1: 17.6048 # 15.6
+  rate_2: 22.0099 # 23.5
+  rate_3: 13.5328 # 14.5
+  rate_4: 19.0844 # 14.7
+  rate_5: 2.7232 # 3.5
+  rate_6: 0.3925 # 0.6
   # Initial distribution (Right skewed Gambel distribution)
   gambel_loc: 43.879419661749694
   gambel_scale: 10.832300773004311

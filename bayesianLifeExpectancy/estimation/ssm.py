@@ -25,12 +25,13 @@ class LifeExpectancy(ssm.StateSpaceModel):
 
     def PX0(self):
         return RightSkewedGambel(loc=self.default_params['gambel_loc'], scale=self.default_params['gambel_scale'])
+        # return dists.Normal(loc=self.default_params['gambel_loc'], scale=self.default_params['gambel_scale'])
 
     def PX(self, t, xp):
         theta_c = (self.triangle_1c, self.triangle_2c, self.triangle_3c, self.triangle_4c, self.k_c, self.z_c)
-        loc = xp - decrement(xp, theta_c)
-        scale = sigma(xp)
-        return dists.Normal(loc=loc, scale=self.omega * scale)
+        loc = xp + decrement(xp, theta_c)
+        scale = 1 * sigma(xp)
+        return dists.Normal(loc=loc, scale=scale)
 
     def PY(self, t, xp, x):
         return dists.Normal(loc=x, scale=0.02)

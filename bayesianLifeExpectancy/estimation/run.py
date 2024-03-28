@@ -20,7 +20,7 @@ def run(country):
         return
 
     DATA = np.array(LE[LE['Region'] == country]['LE'])
-    my_chain = PMMH.run_PMMH(DATA, niter=1000, N_particles=100)
+    my_chain = PMMH.run_PMMH(DATA, niter=10000, N_particles=100, TRY=1)
 
     with open(f'{SAVING_FILE}', 'wb') as handle:
         pickle.dump(my_chain, handle, protocol=pickle.HIGHEST_PROTOCOL)
@@ -28,4 +28,5 @@ def run(country):
 
 if __name__ == "__main__":
     for country in tqdm(LIST_OF_COUNTRIES['Region']):
-        run(country)
+        if country == 'WORLD':
+            run(country)

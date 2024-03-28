@@ -46,7 +46,7 @@ default_prior['z_c'] = dists.Cond(
 default_prior = dists.StructDist(default_prior)
 
 
-def run_PMMH(data, N_particles=200, niter=1000, TRY=2):
+def run_PMMH(data, N_particles=200, niter=1000, TRY=1):
     L = -np.inf
     for i in range(TRY):
         pmmh = mcmc.PMMH(ssm_cls=LifeExpectancy, data=data,
